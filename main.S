@@ -17,7 +17,7 @@ myTable:
 	db	'H','e','l','l','o',' ','W','o','r','l','d','!',0x0a
 					; message, plus carriage return
 	myTable_l   EQU	13	; length of data
-	align	2
+	align	2               ; \[T]/
     
 psect	code, abs	
 rst: 	org 0x0
