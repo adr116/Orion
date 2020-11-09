@@ -1,7 +1,8 @@
 #include <xc.inc>
 
 extrn	UART_Setup, UART_Transmit_Message  ; external subroutines
-extrn	LCD_Setup, LCD_Write_Message
+extrn	LCD_Setup, LCD_Write_Message, LCD_Display_Clear, LCD_Line_1, LCD_Line_2
+extrn	keyboard_setup
 	
 psect	udata_acs   ; reserve data space in access ram
 counter:    ds 1    ; reserve one byte for a counter variable
@@ -27,6 +28,8 @@ setup:	bcf	CFGS	; point to Flash program memory
 	bsf	EEPGD 	; access Flash program memory
 	call	UART_Setup	; setup UART
 	call	LCD_Setup	; setup UART
+	call	manual_line
+	call	keyboard_setup
 	goto	start
 	
 	; ******* Main programme ****************************************
@@ -53,11 +56,18 @@ loop: 	tblrd*+			; one byte from PM to TABLAT, increment TBLPRT
 	lfsr	2, myArray
 	call	LCD_Write_Message
 
+	call	LCD_Display_Clear
 	goto	$		; goto current line in code
 
 	; a delay subroutine if you need one, times around loop in delay_count
 delay:	decfsz	delay_count, A	; decrement until zero
 	bra	delay
+	return
+manual_line:
+	call	LCD_Line_1
+	setf	TRISD, A
+	tstfsz	PORTD, A    ;moves LCD to write in line 2 if PORTD =! 0
+	call	LCD_Line_2
 	return
 
 	end	rst
