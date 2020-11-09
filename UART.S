@@ -8,7 +8,7 @@ UART_counter: ds    1	    ; reserve 1 byte for variable UART_counter
 psect	uart_code,class=CODE
 UART_Setup:
     bsf	    SPEN	; enable
-    bcf	    SYNC	; synchronous
+    bcf	    SYNC	; asynchronous
     bcf	    BRGH	; slow speed
     bsf	    TXEN	; enable transmit
     bcf	    BRG16	; 8-bit generator only
