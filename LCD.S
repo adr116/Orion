@@ -1,6 +1,7 @@
 #include <xc.inc>
 
-global  LCD_Setup, LCD_Write_Message
+global  LCD_Setup, LCD_Write_Message, LCD_Display_Clear, LCD_Line_1, LCD_Line_2
+global	LCD_delay_ms
 
 psect	udata_acs   ; named variables in access ram
 LCD_cnt_l:	ds 1   ; reserve 1 byte for variable LCD_cnt_l
@@ -13,14 +14,40 @@ LCD_counter:	ds 1   ; reserve 1 byte for counting through nessage
     	LCD_RS	EQU 4	; LCD register select bit
 
 psect	lcd_code,class=CODE
-    
+
+LCD_Display_Clear:
+	movlw	0xFFFF		;wait 10s before delay, for visual confirmation
+	call	LCD_delay_ms
+	movlw	00000001B	;clear display
+	call	LCD_Send_Byte_I
+	movlw	2		; wait 2ms (min 1.52ms)
+	call	LCD_delay_ms
+	return
+LCD_Line_1:
+	movlw	0x80		;move cursor to 1st line
+	call	LCD_Send_Byte_I
+	movlw	10
+	call	LCD_delay_x4us
+	return
+LCD_Line_2:
+	movlw	0xC0		;move cursor to 2nd line
+	call	LCD_Send_Byte_I
+	movlw	10
+	call	LCD_delay_x4us
+	return
+LCD_Cursor_Right:
+	movlw	0x14		;move cursor right one
+	call	LCD_Send_Byte_I
+	movlw	10
+	call	LCD_delay_x4us
+	return
 LCD_Setup:
 	clrf    LATB, A
 	movlw   11000000B	    ; RB0:5 all outputs
 	movwf	TRISB, A
 	movlw   40
 	call	LCD_delay_ms	; wait 40ms for LCD to start up properly
-	movlw	00110000B	; Function set 4-bit
+	movlw	0x30	; Function set 4-bit
 	call	LCD_Send_Byte_I
 	movlw	10		; wait 40us
 	call	LCD_delay_x4us
