@@ -2,7 +2,7 @@
 
 extrn	UART_Setup, UART_Transmit_Message  ; external subroutines
 extrn	LCD_Setup, LCD_Write_Message, LCD_Display_Clear, LCD_Line_1, LCD_Line_2
-extrn	keyboard_setup
+;extrn	keyboard_setup
 	
 psect	udata_acs   ; reserve data space in access ram
 counter:    ds 1    ; reserve one byte for a counter variable
@@ -29,7 +29,7 @@ setup:	bcf	CFGS	; point to Flash program memory
 	call	UART_Setup	; setup UART
 	call	LCD_Setup	; setup UART
 	call	manual_line
-	call	keyboard_setup
+	;call	keyboard_setup
 	goto	start
 	
 	; ******* Main programme ****************************************
