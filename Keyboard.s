@@ -1,6 +1,6 @@
 #include <xc.inc>
     
-global	keyboard_setup
+;global	keyboard_setup
 extrn	LCD_delay_ms
 
 psect	udata_acs
@@ -9,12 +9,12 @@ key_column: ds	    1
     
 psect	keyboard_code,class=CODE
 
-keyboard_setup:
-	banksel	PADCFG1
-	bsf	REPU
-	movlb	0x00	    ;enables pull-up resistors
-	clrf	LATE, A
-	return
+;keyboard_setup:
+	;banksel	PADCFG1
+	;bsf	REPU
+	;movlb	0x00	    ;enables pull-up resistors
+	;clrf	LATE, A
+	;return
 keyboard_read:
 	movlw	0x0F	    ;input for 0-3, output for 4-7
 	movwf	TRISE, A
