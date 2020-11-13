@@ -3,7 +3,7 @@
 ;extrn	UART_Setup, UART_Transmit_Message  ; external subroutines
 ;extrn	LCD_Setup, LCD_Write_Message, LCD_Display_Clear, LCD_Line_1, LCD_Line_2
 ;extrn	keyboard_setup
-extrn	GLCD_setup, GLCD_write
+extrn	GLCD_setup, GLCD_Asteroid
 	
 psect	udata_acs   ; reserve data space in access ram
 counter:    ds 1    ; reserve one byte for a counter variable
@@ -58,7 +58,7 @@ setup:	bcf	CFGS	; point to Flash program memory
 	;lfsr	2, myArray
 	;call	LCD_Write_Message
 start:
-	call	GLCD_write
+	call	GLCD_Asteroid
 	;call	LCD_Display_Clear
 	goto	$		; goto current line in code
 
