@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global	GLCD_setup, GLCD_Asteroid
+global	GLCD_setup, GLCD_Asteroid, GLCD_enable, GLCD_yclear
 extrn	LCD_delay_ms
     
 psect	udata_acs   ;access ram for variables
@@ -46,6 +46,10 @@ GLCD_setup:
 	movlw	1
 	call	LCD_delay_ms
 	call	GLCD_clear
+	movlw	0xB8		;command to set X-address to 0
+	movwf	PORTD, A
+	call	GLCD_enable
+	call	GLCD_Asteroid
 	return
 GLCD_clear:
 	movlw	0xB8
