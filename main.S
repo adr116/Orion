@@ -5,6 +5,7 @@
 ;extrn	keyboard_setup
 extrn	GLCD_setup, GLCD_Asteroid
 extrn	AsteroidMove_Page
+extrn	Touch_Boom
 psect	udata_acs   ; reserve data space in access ram
 counter:    ds 1    ; reserve one byte for a counter variable
 delay_count:ds 1    ; reserve one byte for counter in the delay routine
@@ -58,6 +59,7 @@ setup:	bcf	CFGS	; point to Flash program memory
 	;lfsr	2, myArray
 	;call	LCD_Write_Message
 start:
+	;call	Touch_Boom
 	call	AsteroidMove_Page
 	;call	LCD_Display_Clear
 	goto	$		; goto current line in code
