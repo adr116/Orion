@@ -3,6 +3,7 @@
 global	AsteroidMove_Page
 extrn	GLCD_Asteroid, GLCD_enable, GLCD_yclear
 extrn	LCD_delay_ms
+extrn	Touch_Boom
     
 psect	udata_acs   ;access ram for variables
 AsteroidMove_xaddress:	ds  1
@@ -40,11 +41,12 @@ PageLoop:
 	call	LCD_delay_ms
 	movlw	0xFFFF		    ;loop to slow 2
 	call	LCD_delay_ms
+	call	Touch_Boom
 	movlw	0xFFFF		    ;loop to slow 3
 	call	LCD_delay_ms
 	movlw	0xFFFF		    ;loop to slow 4
 	call	LCD_delay_ms
-	movlw	0xBF		    ;maximum x-address value for loop
+	movlw	0xBE		    ;maximum x-address value for loop
 	cpfsgt	AsteroidMove_xaddress, A
 	bra	PageLoop
 	return
