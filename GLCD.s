@@ -130,7 +130,7 @@ GLCD_GameOver:
 	call	GameOver_E
 	call	GameOver_R
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
-	return
+	goto	$
 GameOver_G:
 	movlw	0x7C		;drawing each column in the letters
 	movwf	PORTD, A
