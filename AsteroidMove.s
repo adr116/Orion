@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global	AsteroidMove_Page
+global	AsteroidMove_Page, AsteroidMove_Setup
 extrn	GLCD_Asteroid, GLCD_enable, GLCD_yclear, GLCD_GameOver
 extrn	LCD_delay_ms
 extrn	Touch_Boom
@@ -18,7 +18,10 @@ AsteroidCounter:    ds	1
 
  psect	asteroidmove_code,class=CODE	
     
-	
+AsteroidMove_Setup:
+	movlw   0x00
+	movwf	AsteroidCounter, A
+	return
 AsteroidMove_Page:
 	movlw	0xB8			;sets page to 0
 	movwf	AsteroidMove_xaddress, A
@@ -57,8 +60,12 @@ AsteroidDespawn:
 	call	GLCD_yclear	    ;clear screen
 	call	GLCD_enable
 	incf	AsteroidCounter, F, A	    ;increment the death counter
-	movlw	0x02
+	movlw	0x03
 	cpfslt	AsteroidCounter, A  ;Game Over if counter reaches 3
 	call	GLCD_GameOver
-	return
+	movlw	0xB8		;command to set X-address to 0
+	movwf	PORTD, A
+	call	GLCD_enable
+	call	GLCD_Asteroid
+	goto	AsteroidMove_Page
 	
