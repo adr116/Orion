@@ -111,10 +111,23 @@ Asteroid_P4:
 	call	GLCD_enable
 	return
 GLCD_GameOver:
+	movlw	0xB8			;sets page to 0
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x40		    ;sets y-address to 0
+	movwf	PORTD, A
+	call	GLCD_enable
 	bsf	LATB, GLCD_RS, A    ;turns on RS pin to read/write data
-	call	GameOver_G	    ;drawing the letters
+	call	GameOver_G	;drawing the letters
+	call	GameOver_A
 	call	GameOver_M
 	call	GameOver_E
+	movlw	0xB9			;sets page to 0
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x40		    ;sets y-address to 0
+	movwf	PORTD, A
+	call	GLCD_enable
 	call	GameOver_O
 	call	GameOver_V
 	call	GameOver_E
@@ -122,27 +135,139 @@ GLCD_GameOver:
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	return
 GameOver_G:
-	movlw	0x3E		;drawing each column in the letters
+	movlw	0x7C		;drawing each column in the letters
 	movwf	PORTD, A
 	call	GLCD_enable
-	movlw	0x41
+	movlw	0x82
 	movwf	PORTD, A
 	call	GLCD_enable
-	movlw	0x45
+	movlw	0xA2
 	movwf	PORTD, A
 	call	GLCD_enable
-	movlw	0x26
+	movlw	0x64
 	movwf	PORTD, A
 	call	GLCD_enable
-	movlw	0x07
+	movlw	0xE0
 	movwf	PORTD, A
 	call	GLCD_enable
 	movlw	0x00	    ;space before next letter
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-	
-	
+GameOver_A:
+	movlw	0xF8		;drawing each column in the letters
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x24
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x22
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0xFE
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next letter
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+GameOver_M:
+	movlw	0xFE		;drawing each column in the letters
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x08
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x10
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x20
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x10
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x08	    
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0xFE
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next letter
+	movwf	PORTD, A
+	call	GLCD_enable
+	return	
+GameOver_E:
+	movlw	0xFE		;drawing each column in the letters
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x82
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next letter
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+GameOver_O:
+	movlw	0x7C		;drawing each column in the letters
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x82
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x82
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x7C
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next letter
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+GameOver_V:
+	movlw	0x3E		;drawing each column in the letters
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x40
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x80
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x40
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x3E
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next letter
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+GameOver_R:
+	movlw	0xFE		;drawing each column in the letters
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x22
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x62
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x9C
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next letter
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
 GLCD_enable:
 	nop			;each command is 250ns, at 16MHz
 	nop
