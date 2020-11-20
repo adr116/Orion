@@ -122,10 +122,7 @@ GLCD_GameOver:
 	call	GameOver_A
 	call	GameOver_M
 	call	GameOver_E
-	movlw	0xB9			;sets page to 0
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x40		    ;sets y-address to 0
+	movlw	0x00	    ;extra space before next word
 	movwf	PORTD, A
 	call	GLCD_enable
 	call	GameOver_O
