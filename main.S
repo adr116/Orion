@@ -4,7 +4,7 @@
 ;extrn	LCD_Setup, LCD_Write_Message, LCD_Display_Clear, LCD_Line_1, LCD_Line_2
 ;extrn	keyboard_setup
 extrn	GLCD_setup, GLCD_Asteroid
-extrn	AsteroidMove_Page
+extrn	AsteroidMove_Page, AsteroidMove_Setup
 extrn	Touch_Boom
 psect	udata_acs   ; reserve data space in access ram
 counter:    ds 1    ; reserve one byte for a counter variable
@@ -33,6 +33,7 @@ setup:	bcf	CFGS	; point to Flash program memory
 	;call	manual_line
 	;call	keyboard_setup
 	call	GLCD_setup
+	call	AsteroidMove_Setup
 	goto	start
 	
 	; ******* Main programme ****************************************
