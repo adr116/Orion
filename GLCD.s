@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global	GLCD_setup, GLCD_Asteroid, GLCD_enable, GLCD_yclear
+global	GLCD_setup, GLCD_Asteroid, GLCD_enable, GLCD_yclear, GLCD_GameOver
 extrn	LCD_delay_ms
     
 psect	udata_acs   ;access ram for variables
@@ -110,6 +110,39 @@ Asteroid_P4:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
+GLCD_GameOver:
+	bsf	LATB, GLCD_RS, A    ;turns on RS pin to read/write data
+	call	GameOver_G	    ;drawing the letters
+	call	GameOver_M
+	call	GameOver_E
+	call	GameOver_O
+	call	GameOver_V
+	call	GameOver_E
+	call	GameOver_R
+	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
+	return
+GameOver_G:
+	movlw	0x3E		;drawing each column in the letters
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x41
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x45
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x26
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x07
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next letter
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+	
+	
 GLCD_enable:
 	nop			;each command is 250ns, at 16MHz
 	nop
@@ -130,4 +163,3 @@ GLCD_enable:
 	movlw	0x01
 	call	LCD_delay_ms
 	return
-	
