@@ -54,28 +54,11 @@ PageLoop:
 	return
 	
 AsteroidDespawn:
-	movlw	0xFFFF		    ;loop to slow 1
-	call	LCD_delay_ms
-	movlw	0xFFFF		    ;loop to slow 2
-	call	LCD_delay_ms
-	movlw	0xFFFF		    ;loop to slow 3
-	call	LCD_delay_ms
-	movlw	0xFFFF		    ;loop to slow 4
-	call	LCD_delay_ms
 	call	GLCD_yclear	    ;clear screen
 	call	GLCD_enable
 	incf	AsteroidCounter, F, A	    ;increment the death counter
 	movlw	0x02
-	cpfsgt	AsteroidCounter, A  ;Game Over if counter reaches 3
-	call	DeathScreen
-	return
-	
-DeathScreen:
-	movlw	0xB8			;sets page to 0
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x40		    ;sets y-address to 0
-	movwf	PORTD, A
-	call	GLCD_enable
+	cpfslt	AsteroidCounter, A  ;Game Over if counter reaches 3
 	call	GLCD_GameOver
 	return
+	
