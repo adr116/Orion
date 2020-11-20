@@ -1,12 +1,13 @@
 #include <xc.inc>
 
 global	AsteroidMove_Page
-extrn	GLCD_Asteroid, GLCD_enable, GLCD_yclear
+extrn	GLCD_Asteroid, GLCD_enable, GLCD_yclear, GLCD_GameOver
 extrn	LCD_delay_ms
 extrn	Touch_Boom
     
 psect	udata_acs   ;access ram for variables
 AsteroidMove_xaddress:	ds  1
+AsteroidCounter:    ds	1
 
 ;PORTB: 0=CS1 (1=left screen), 1=CS2 (1=right screen), 2=RS (0=instruction, 1=data)
     ;3=R/W (0=write, 1=read), 4=E (0=disable, 1=enable signal), 5=RST (0=reset)
@@ -49,4 +50,32 @@ PageLoop:
 	movlw	0xBE		    ;maximum x-address value for loop
 	cpfsgt	AsteroidMove_xaddress, A
 	bra	PageLoop
+	call	AsteroidDespawn
+	return
+	
+AsteroidDespawn:
+	movlw	0xFFFF		    ;loop to slow 1
+	call	LCD_delay_ms
+	movlw	0xFFFF		    ;loop to slow 2
+	call	LCD_delay_ms
+	movlw	0xFFFF		    ;loop to slow 3
+	call	LCD_delay_ms
+	movlw	0xFFFF		    ;loop to slow 4
+	call	LCD_delay_ms
+	call	GLCD_yclear	    ;clear screen
+	call	GLCD_enable
+	incf	AsteroidCounter, F, A	    ;increment the death counter
+	movlw	0x02
+	cpfsgt	AsteroidCounter, A  ;Game Over if counter reaches 3
+	call	DeathScreen
+	return
+	
+DeathScreen:
+	movlw	0xB8			;sets page to 0
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x40		    ;sets y-address to 0
+	movwf	PORTD, A
+	call	GLCD_enable
+	call	GLCD_GameOver
 	return
