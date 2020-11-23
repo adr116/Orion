@@ -45,7 +45,7 @@ PageLoop:
 	call	LCD_delay_ms
 	movlw	0xFFFF		    ;loop to slow 2
 	call	LCD_delay_ms
-	call	Touch_Boom
+	call	Touch_Boom	    ;summons touch input for later use
 	movlw	0xFFFF		    ;loop to slow 3
 	call	LCD_delay_ms
 	movlw	0xFFFF		    ;loop to slow 4
