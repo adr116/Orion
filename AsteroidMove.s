@@ -19,7 +19,7 @@ AsteroidCounter:    ds	1
  psect	asteroidmove_code,class=CODE	
     
 AsteroidMove_Setup:
-	movlw   0x00
+	movlw	0x00
 	movwf	AsteroidCounter, A
 	return
 AsteroidMove_Page:
@@ -67,5 +67,13 @@ AsteroidDespawn:
 	movwf	PORTD, A
 	call	GLCD_enable
 	call	GLCD_Asteroid
+	movlw	0xFFFF		    ;loop to slow 1
+	call	LCD_delay_ms
+	movlw	0xFFFF		    ;loop to slow 2
+	call	LCD_delay_ms
+	movlw	0xFFFF		    ;loop to slow 3
+	call	LCD_delay_ms
+	movlw	0xFFFF		    ;loop to slow 4
+	call	LCD_delay_ms
 	goto	AsteroidMove_Page
 	
