@@ -66,6 +66,9 @@ AsteroidDespawn:
 	movlw	0xB8		;command to set X-address to 0
 	movwf	PORTD, A
 	call	GLCD_enable
+	movlw	0x40		    ;sets y-address to 0
+	movwf	PORTD, A
+	call	GLCD_enable
 	call	GLCD_Asteroid
 	movlw	0xFFFF		    ;loop to slow 1
 	call	LCD_delay_ms
