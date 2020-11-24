@@ -1,14 +1,15 @@
 #include <xc.inc>
 
 global	AsteroidMove_Page, AsteroidMove_Setup
-extrn	GLCD_Asteroid, GLCD_enable, GLCD_yclear, GLCD_GameOver
+extrn	GLCD_Asteroid, GLCD_enable, GLCD_yclear, GLCD_GameOver, GLCD_Lives_3, GLCD_Lives_2, GLCD_Lives_1
 extrn	LCD_delay_ms
 extrn	Touch_Boom
     
 psect	udata_acs   ;access ram for variables
 AsteroidMove_xaddress:	ds  1
-AsteroidCounter:    ds	1
-
+AsteroidCounter:    ds	1   ;counter for number of asteroids that pass the bottom
+Lives:	ds  1	;number of remaining lives, can maybe replace AsteroidCounter
+    
 ;PORTB: 0=CS1 (1=left screen), 1=CS2 (1=right screen), 2=RS (0=instruction, 1=data)
     ;3=R/W (0=write, 1=read), 4=E (0=disable, 1=enable signal), 5=RST (0=reset)
     	
@@ -21,6 +22,9 @@ AsteroidCounter:    ds	1
 AsteroidMove_Setup:
 	movlw	0x00
 	movwf	AsteroidCounter, A
+	movlw	0x03
+	movwf	Lives, A
+	call	GLCD_Lives_3
 	return
 AsteroidMove_Page:
 	movlw	0xB8			;sets page to 0
@@ -59,10 +63,14 @@ PageLoop:
 AsteroidDespawn:
 	call	GLCD_yclear	    ;clear screen
 	call	GLCD_enable
-	incf	AsteroidCounter, F, A	    ;increment the death counter
-	movlw	0x03
-	cpfslt	AsteroidCounter, A  ;Game Over if counter reaches 3
+	dcfsnz	Lives, A	;decrement lives, calls game over if it reaches 0
 	call	GLCD_GameOver
+	movlw	0x01
+	cpfsgt	Lives, A
+	call	GLCD_Lives_1
+	movlw	0x02
+	cpfslt	Lives, A
+	call	GLCD_Lives_2
 	movlw	0xB8		;command to set X-address to 0
 	movwf	PORTD, A
 	call	GLCD_enable
