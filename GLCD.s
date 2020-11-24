@@ -446,6 +446,111 @@ Display_3:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
+Display_4: 
+	movlw	0x30		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x28
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x24
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0xFE
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x20
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_5: 
+	movlw	0x4E		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x8A
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x8A
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x72
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_6: 
+	movlw	0x7C		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x64
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_7: 
+	movlw	0x02		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0xE2
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x12
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x0E
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_8: 
+	movlw	0x6C		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x6C
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_9: 
+	movlw	0x4C		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x7C
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
 GLCD_enable:
 	nop			;each command is 250ns, at 16MHz
 	nop
