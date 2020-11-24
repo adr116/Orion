@@ -23,7 +23,7 @@ GLCD_setup:
 	clrf	TRISD, A	;turn off input for all TRISD
 	movlw	40
 	call	LCD_delay_ms
-	movlw	0x20		;turn on CS1&2, keep RST high (to avoid reset)
+	movlw	0x22		;turn on CS1, keep RST high (to avoid reset)
 	movwf	PORTB, A	
 	movlw	0x3F		;command to turn on GLCD
 	movwf	PORTD, A
