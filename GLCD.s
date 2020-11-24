@@ -130,6 +130,21 @@ GLCD_GameOver:
 	call	Display_E
 	call	Display_R
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
+	movlw	0xBA			;sets page to 2
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x40		    ;sets y-address to 0
+	movwf	PORTD, A
+	call	GLCD_enable
+	bsf	LATB, GLCD_RS, A    ;turns on RS pin to read/write data
+	call	Display_S	;drawing the letters
+	call	Display_C
+	call	Display_O
+	call	Display_R
+	call	Display_E
+	call	Display_Colon
+	call	Display_O
+	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	goto	$
 GLCD_Lives_3:
 	movlw	0xBF			;sets page to 7
@@ -143,7 +158,8 @@ GLCD_Lives_3:
 	call	Display_I
 	call	Display_V
 	call	Display_E
-	call	Display_S_Colon
+	call	Display_S
+	call	Display_Colon
 	call	Display_3
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	return
@@ -159,7 +175,8 @@ GLCD_Lives_2:
 	call	Display_I
 	call	Display_V
 	call	Display_E
-	call	Display_S_Colon
+	call	Display_S
+	call	Display_Colon
 	call	Display_2
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	return
@@ -175,7 +192,8 @@ GLCD_Lives_1:
 	call	Display_I
 	call	Display_V
 	call	Display_E
-	call	Display_S_Colon
+	call	Display_S
+	call	Display_Colon
 	call	Display_1
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	return
@@ -338,7 +356,7 @@ Display_I:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_S_Colon:
+Display_S:
 	movlw	0x4C		;drawing each column in the letters
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -351,10 +369,29 @@ Display_S_Colon:
 	movlw	0x64
 	movwf	PORTD, A
 	call	GLCD_enable
-	movlw	0x00	    ;space before colon
+	movlw	0x00	    ;space before next letter
 	movwf	PORTD, A
 	call	GLCD_enable
-	movlw	0x28	    ;colon
+	return
+Display_C:
+	movlw	0x7C		;drawing each column in the letters
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x82
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x82
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x44
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next letter
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_Colon:
+	movlw	0x28
 	movwf	PORTD, A
 	call	GLCD_enable
 	movlw	0x00	    ;space before next letter
