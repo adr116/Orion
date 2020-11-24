@@ -351,7 +351,10 @@ Display_S_Colon:
 	movlw	0x64
 	movwf	PORTD, A
 	call	GLCD_enable
-	movlw	0x28
+	movlw	0x00	    ;space before colon
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x28	    ;colon
 	movwf	PORTD, A
 	call	GLCD_enable
 	movlw	0x00	    ;space before next letter
