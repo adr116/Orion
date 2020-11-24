@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global	AsteroidMove_Page, AsteroidMove_Setup
+global	AsteroidMove_Page, AsteroidMove_Setup, BranchHub
 extrn	GLCD_Asteroid, GLCD_enable, GLCD_yclear, GLCD_GameOver, GLCD_Lives_3, GLCD_Lives_2, GLCD_Lives_1
 extrn	LCD_delay_ms
 extrn	Touch_Boom
@@ -35,7 +35,8 @@ AsteroidMove_Page:
 	call	GLCD_enable
 	call	PageLoop
 	return
-
+BranchHub:
+	bra	AsteroidMove_Page
 PageLoop:
 	call	GLCD_yclear		;empties page
 	incf	AsteroidMove_xaddress, F, A
