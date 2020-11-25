@@ -3,7 +3,7 @@
 global	Touch_Boom, ADC_Setup
     
 extrn	LCD_delay_ms
-extrn	BranchHub
+extrn	BranchHub, AsteroidMove_Page
     
 psect	udata_acs   ;access ram for variables
 Touch_counter:	ds  1
@@ -63,7 +63,8 @@ comparisony:				;resets asteroid if correct column hit
 	return
 	movlw	0x02
 	cpfsgt	Touch_ADH, A			;does not hit asteroid if greater than w
-	call	BranchHub
+	;call	BranchHub
+	goto	AsteroidMove_Page
 	return
 ADC_Setup:		    ;should initialize F2 & F5 pins for analogue
 	bcf	TRISE, Touch_DRIVEA, A ;sets DRIVEA pin to input
