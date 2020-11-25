@@ -25,14 +25,14 @@ Touch_Boom:
 	;incf    Touch_counter, F, A
 	;bcf	PORTF, Touch_READY, A
 	;bsf	PORTF, Touch_READX, A
-	call    xaxis
+	call    xaxis			;measures page (vertical)
 	movff	ADRESH, Touch_ADH, A	;stores high analogue bits for reference
 	movff	ADRESL, Touch_ADL, A	;stores low analogue bits for reference
-	;call	comparison
-	call	yaxis
+	;call	comparisonx
+	call	yaxis			;measures horizontal position
 	movff	ADRESH, Touch_ADH, A
 	movff	ADRESL, Touch_ADL, A
-	;call	comparison
+	call	comparisony		;checks if asteroid is hit
 	return
 xaxis:
 	movlw   00011101B        ; select AN7 for measurement and turn ADC on
@@ -52,9 +52,17 @@ yaxis:
 	call	LCD_delay_ms
 	call	ADC_Read
 	return
-comparison:
-	movlw	0x01
-	cpfslt	Touch_ADH, A
+;comparisonx:				;resets asteroid if correct page hit
+	;movlw	0x00			;where one can hit the asteroid
+	;cpfslt	Touch_ADH, A		;is a hit if less than w
+	;return
+	;call	BranchHub
+comparisony:				;resets asteroid if correct column hit
+	movlw	0x00			;registering if there is any touch
+	cpfsgt	Touch_ADH, A		
+	return
+	movlw	0x02
+	cpfsgt	Touch_ADH, A			;does not hit asteroid if greater than w
 	call	BranchHub
 	return
 ADC_Setup:		    ;should initialize F2 & F5 pins for analogue
