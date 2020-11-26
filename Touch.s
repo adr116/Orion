@@ -4,6 +4,8 @@ global	Touch_Boom, ADC_Setup
     
 extrn	LCD_delay_ms
 extrn	BranchHub, AsteroidMove_Page
+extrn	GLCD_yclear
+extrn	Score_Inc
     
 psect	udata_acs   ;access ram for variables
 Touch_counter:	ds  1
@@ -68,8 +70,13 @@ comparisony:				;resets asteroid if correct column hit
 	movlw	0x02
 	cpfsgt	Touch_ADH, A			;does not hit asteroid if greater than w
 	;call	BranchHub
-	goto	AsteroidMove_Page
+	bra	boom
 	return
+boom:
+	call	GLCD_yclear
+	;call	Score_Inc		    ;score doesn't work right now
+	;currently branches to wrong location in GLCD for unknown reasons
+	goto	AsteroidMove_Page
 ADC_Setup:		    ;should initialize F2 & F5 pins for analogue
 	bcf	TRISE, Touch_DRIVEA, A ;sets DRIVEA pin to input
 	bcf	TRISE, Touch_DRIVEB, A ;sets DRIVEB pin to input
