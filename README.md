@@ -3,6 +3,10 @@ Repository for Physics Year 3 microprocessors lab
 
 A simple assembly program for PIC18 microprocessor
 
-Reads a table (message) from programme memory to data memory
+Creates 'asteroid' that moves down the page
 
-Initialises UART and writes a message (the table) to UART 
+If correct column is touched, asteroid will dissapear and restart at top of page
+
+When asteroid reaches the bottom one 'life' is lost
+  currently start with three lives
+  
