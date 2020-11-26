@@ -6,6 +6,7 @@
 extrn	GLCD_setup, GLCD_Asteroid
 extrn	AsteroidMove_Page, AsteroidMove_Setup
 extrn	Touch_Boom, ADC_Setup
+extrn	Score_Setup
 psect	udata_acs   ; reserve data space in access ram
 counter:    ds 1    ; reserve one byte for a counter variable
 delay_count:ds 1    ; reserve one byte for counter in the delay routine
@@ -33,6 +34,7 @@ setup:	bcf	CFGS	; point to Flash program memory
 	;call	manual_line
 	;call	keyboard_setup
 	call	GLCD_setup
+	call	Score_Setup
 	call	AsteroidMove_Setup
 	call	ADC_Setup
 	goto	start
