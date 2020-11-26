@@ -53,10 +53,14 @@ yaxis:
 	call	ADC_Read
 	return
 ;comparisonx:				;resets asteroid if correct page hit
+		;need to know what values asteroid is going to be before check
 	;movlw	0x00			;where one can hit the asteroid
 	;cpfslt	Touch_ADH, A		;is a hit if less than w
 	;return
+	;movlw				;is the problem, as one needs to know where to check before check
+	;cpfsgt	Touch_ADH, A
 	;call	BranchHub
+	;goto	AsteroidMove_Page
 comparisony:				;resets asteroid if correct column hit
 	movlw	0x00			;registering if there is any touch
 	cpfsgt	Touch_ADH, A		
