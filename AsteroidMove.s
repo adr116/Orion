@@ -7,7 +7,6 @@ extrn	Touch_Boom
     
 psect	udata_acs   ;access ram for variables
 AsteroidMove_xaddress:	ds  1
-AsteroidCounter:    ds	1   ;counter for number of asteroids that pass the bottom
 Lives:	ds  1	;number of remaining lives, can maybe replace AsteroidCounter
     
 ;PORTB: 0=CS1 (1=left screen), 1=CS2 (1=right screen), 2=RS (0=instruction, 1=data)
@@ -20,8 +19,6 @@ Lives:	ds  1	;number of remaining lives, can maybe replace AsteroidCounter
  psect	asteroidmove_code,class=CODE	
     
 AsteroidMove_Setup:
-	movlw	0x00
-	movwf	AsteroidCounter, A
 	movlw	0x03
 	movwf	Lives, A
 	call	GLCD_Lives_3
