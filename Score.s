@@ -1,6 +1,6 @@
 #include <xc.inc>
 
-global	Score_Setup, Score_Digit, Score_Test_1
+global	Score_Setup, Score_Digit, Score_Test_1, Score_Inc
 extrn	LCD_delay_ms 
 extrn	GLCD_Digit_Write, GLCD_enable, GLCD_Display_O
     
@@ -19,7 +19,7 @@ Score_Digit:	ds  1	;stores current digit to be drawn
 
  psect	score_code,class=CODE
 
-Score_Setup: 
+Score_Setup:
 	movlw	0x00
 	movwf	Score, A    ;reset score
 	return
@@ -57,6 +57,7 @@ Score_1_Digit:
 	call	GLCD_Display_O
 	call	GLCD_Display_O	    ;First two digits always 0 if score < 10
 	movff	Score, Score_Digit
+	return		    ;test return to force score to be zero, remove after troubleshooting
 	call	GLCD_Digit_Write
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	return
