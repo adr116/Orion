@@ -229,6 +229,159 @@ GLCD_Digit_Write:			;works out the digit to display
 	xorwf	Score_Digit, A
 	bnz	Display_1
 	bra	GLCD_Display_O
+Display_1:
+	movlw	0x08		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x04
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0xFE
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_2: 
+	movlw	0xC4		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0xA2
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x8C
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_3: 
+	movlw	0x44		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x6C
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_4: 
+	movlw	0x30		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x28
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x24
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0xFE
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x20
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_5: 
+	movlw	0x4E		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x8A
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x8A
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x72
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_6: 
+	movlw	0x7C		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x64
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_7: 
+	movlw	0x02		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0xE2
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x12
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x0E
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_8: 
+	movlw	0x6C		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x6C
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
+Display_9: 
+	movlw	0x4C		;drawing each column in the number
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x92
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x7C
+	movwf	PORTD, A
+	call	GLCD_enable
+	movlw	0x00	    ;space before next number
+	movwf	PORTD, A
+	call	GLCD_enable
+	return
 Display_G:
 	movlw	0x7C		;drawing each column in the letters
 	movwf	PORTD, A
@@ -427,159 +580,6 @@ Display_Colon:
 	movwf	PORTD, A
 	call	GLCD_enable
 	movlw	0x00	    ;space before next letter
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_1:
-	movlw	0x08		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x04
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0xFE
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_2: 
-	movlw	0xC4		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0xA2
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x8C
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_3: 
-	movlw	0x44		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x6C
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_4: 
-	movlw	0x30		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x28
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x24
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0xFE
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x20
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_5: 
-	movlw	0x4E		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x8A
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x8A
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x72
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_6: 
-	movlw	0x7C		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x64
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_7: 
-	movlw	0x02		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0xE2
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x12
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x0E
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_8: 
-	movlw	0x6C		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x6C
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
-	movwf	PORTD, A
-	call	GLCD_enable
-	return
-Display_9: 
-	movlw	0x4C		;drawing each column in the number
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x92
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x7C
-	movwf	PORTD, A
-	call	GLCD_enable
-	movlw	0x00	    ;space before next number
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
