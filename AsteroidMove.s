@@ -65,10 +65,10 @@ AsteroidDespawn:
 	call	GLCD_GameOver
 	movlw	0x01
 	cpfsgt	Lives, A
-	call	GLCD_Lives_1
+	call	GLCD_Lives_1	;set lives to 1
 	movlw	0x02
 	cpfslt	Lives, A
-	call	GLCD_Lives_2
+	call	GLCD_Lives_2	;set lives to 2
 	movlw	0xB8		;command to set X-address to 0
 	movwf	PORTD, A
 	call	GLCD_enable
