@@ -1,7 +1,8 @@
 #include <xc.inc>
 
-global	GLCD_setup, GLCD_Asteroid, GLCD_enable, GLCD_yclear, GLCD_GameOver, GLCD_Lives_3, GLCD_Lives_2, GLCD_Lives_1, GLCD_Digit_Write, GLCD_Display_O
-extrn	LCD_delay_ms, Score_Digit, Score_Test_1
+global	GLCD_setup, GLCD_Asteroid, GLCD_enable, GLCD_yclear, GLCD_GameOver, GLCD_Lives_3, GLCD_Lives_2, GLCD_Lives_1, GLCD_Display_O
+global	GLCD_Display_1, GLCD_Display_2, GLCD_Display_3, GLCD_Display_4, GLCD_Display_5, GLCD_Display_6, GLCD_Display_7, GLCD_Display_8, GLCD_Display_9
+extrn	LCD_delay_ms, Score_Test_1
     
 psect	udata_acs   ;access ram for variables
 GLCD_ycounter:	ds  1	;for left/right
@@ -146,7 +147,7 @@ GLCD_Lives_3:
 	call	Display_E
 	call	Display_S
 	call	Display_Colon
-	call	Display_3
+	call	GLCD_Display_3
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	return
 GLCD_Lives_2:
@@ -163,7 +164,7 @@ GLCD_Lives_2:
 	call	Display_E
 	call	Display_S
 	call	Display_Colon
-	call	Display_2
+	call	GLCD_Display_2
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	return
 GLCD_Lives_1:
@@ -180,7 +181,7 @@ GLCD_Lives_1:
 	call	Display_E
 	call	Display_S
 	call	Display_Colon
-	call	Display_1
+	call	GLCD_Display_1
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	return
 GLCD_Score:
@@ -200,36 +201,7 @@ GLCD_Score:
 	bcf	LATB, GLCD_RS, A    ;turns off RS pin to avoid read/write data
 	call	Score_Test_1	;work out the decimal digits of the score
 	return
-GLCD_Digit_Write:			;works out the digit to display
-	movlw	0x09
-	xorwf	Score_Digit, A		;xorwf with bnz functions as 'skip if not equal'
-	bnz	Display_9
-	movlw	0x08
-	xorwf	Score_Digit, A
-	bnz	Display_8
-	movlw	0x07
-	xorwf	Score_Digit, A
-	bnz	Display_7
-	movlw	0x06
-	xorwf	Score_Digit, A
-	bnz	Display_6
-	movlw	0x05
-	xorwf	Score_Digit, A
-	bnz	Display_5
-	movlw	0x04
-	xorwf	Score_Digit, A
-	bnz	Display_4
-	movlw	0x03
-	xorwf	Score_Digit, A
-	bnz	Display_3
-	movlw	0x02
-	xorwf	Score_Digit, A
-	bnz	Display_2
-	movlw	0x01
-	xorwf	Score_Digit, A
-	bnz	Display_1
-	bra	GLCD_Display_O
-Display_1:
+GLCD_Display_1:
 	movlw	0x08		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -243,7 +215,7 @@ Display_1:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_2: 
+GLCD_Display_2: 
 	movlw	0xC4		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -260,7 +232,7 @@ Display_2:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_3: 
+GLCD_Display_3: 
 	movlw	0x44		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -277,7 +249,7 @@ Display_3:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_4: 
+GLCD_Display_4: 
 	movlw	0x30		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -297,7 +269,7 @@ Display_4:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_5: 
+GLCD_Display_5: 
 	movlw	0x4E		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -314,7 +286,7 @@ Display_5:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_6: 
+GLCD_Display_6: 
 	movlw	0x7C		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -331,7 +303,7 @@ Display_6:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_7: 
+GLCD_Display_7: 
 	movlw	0x02		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -348,7 +320,7 @@ Display_7:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_8: 
+GLCD_Display_8: 
 	movlw	0x6C		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
@@ -365,7 +337,7 @@ Display_8:
 	movwf	PORTD, A
 	call	GLCD_enable
 	return
-Display_9: 
+GLCD_Display_9: 
 	movlw	0x4C		;drawing each column in the number
 	movwf	PORTD, A
 	call	GLCD_enable
