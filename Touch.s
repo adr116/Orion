@@ -74,8 +74,7 @@ comparisony:				;resets asteroid if correct column hit
 	return
 boom:
 	call	GLCD_yclear
-	;call	Score_Inc		    ;score doesn't work right now
-	;currently branches to wrong location in GLCD for unknown reasons
+	call	Score_Inc		    ;increment score when asteroid destroyed
 	goto	AsteroidMove_Page
 ADC_Setup:		    ;should initialize F2 & F5 pins for analogue
 	bcf	TRISE, Touch_DRIVEA, A ;sets DRIVEA pin to input
